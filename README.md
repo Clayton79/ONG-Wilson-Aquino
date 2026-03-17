@@ -260,504 +260,65 @@ Após executar `npm run seed`, os seguintes usuários são criados:
 
 ## 📖 Documentação da API
 
-**Base URL:** `https://ong-wilson-aquino-api.onrender.com/api`
+A API do sistema está disponível em `https://ong-wilson-aquino-api.onrender.com/api`. Todas as respostas seguem um formato padronizado com os campos `success`, `data` e `message`. Em caso de erro, a resposta inclui o campo `errors` com detalhes de validação.
 
-Todas as rotas (exceto auth e health check) requerem autenticação via header:
+Com exceção das rotas de autenticação e do health check, todas as requisições exigem um token JWT enviado no header `Authorization: Bearer <token>`.
 
-```
-Authorization: Bearer <token>
-```
-
-### Formato de Resposta Padrão
-
-```json
-{
-  "success": true,
-  "data": { },
-  "message": "Operação realizada com sucesso"
-}
-```
-
-```json
-{
-  "success": false,
-  "message": "Descrição do erro",
-  "errors": ["campo: mensagem de erro"]
-}
-```
-
-### Paginação
-
-Rotas de listagem suportam query params:
-
-| Parâmetro | Tipo | Padrão | Descrição |
-|-----------|------|--------|-----------|
-| `page` | number | `1` | Página atual |
-| `limit` | number | `10` | Itens por página (máx. 100) |
-| `search` | string | — | Busca full-text |
-| `sortBy` | string | `createdAt` | Campo de ordenação |
-| `sortOrder` | `asc` \| `desc` | `desc` | Direção da ordenação |
-
-Resposta paginada:
-
-```json
-{
-  "success": true,
-  "data": [],
-  "total": 50,
-  "page": 1,
-  "limit": 10,
-  "totalPages": 5
-}
-```
+As rotas de listagem suportam paginação com os parâmetros `page`, `limit`, `search`, `sortBy` e `sortOrder`, retornando os dados junto com metadados de total de registros e número de páginas.
 
 ---
 
 ### Autenticação
 
-#### `POST /api/auth/login`
-
-Realiza login e retorna token JWT.
-
-**Body:**
-```json
-{
-  "email": "admin@wilsonaquino.org",
-  "password": "admin123"
-}
-```
-
-**Resposta (200):**
-```json
-{
-  "success": true,
-  "data": {
-    "user": {
-      "id": "uuid",
-      "name": "Administrador",
-      "email": "admin@wilsonaquino.org",
-      "role": "admin",
-      "phone": "(11) 99999-0001",
-      "isActive": true,
-      "createdAt": "2025-12-17T...",
-      "updatedAt": "2025-12-17T..."
-    },
-    "token": "eyJhbGciOiJIUzI1NiIs...",
-    "expiresAt": "2026-03-18T..."
-  }
-}
-```
-
-#### `POST /api/auth/register`
-
-Registra um novo usuário.
-
-**Body:**
-```json
-{
-  "name": "Novo Usuário",
-  "email": "novo@email.com",
-  "password": "senha123",
-  "role": "visitor",
-  "phone": "(11) 99999-0000"
-}
-```
-
-**Validação:**
-- `name`: mínimo 2 caracteres
-- `email`: formato válido
-- `password`: mínimo 6 caracteres
-- `role`: opcional (`admin`, `volunteer`, `donor`, `visitor`)
-- `phone`: opcional
-
-#### `POST /api/auth/recover`
-
-Solicita recuperação de senha.
-
-**Body:**
-```json
-{
-  "email": "admin@wilsonaquino.org"
-}
-```
-
-#### `GET /api/auth/profile`
-
-🔒 **Requer autenticação**
-
-Retorna o perfil do usuário logado.
-
-#### `PUT /api/auth/profile`
-
-🔒 **Requer autenticação**
-
-Atualiza o perfil do usuário logado.
-
-**Body:** campos a atualizar (`name`, `phone`, `avatar`)
+O módulo de autenticação permite que usuários façam login, se registrem e gerenciem seus perfis. Ao enviar email e senha para a rota de login, o sistema retorna um token JWT válido por 24 horas, além dos dados completos do usuário (nome, email, papel, telefone e status). O registro cria um novo usuário no sistema — é necessário informar nome (mínimo 2 caracteres), email válido e senha (mínimo 6 caracteres); opcionalmente pode-se definir o papel (`admin`, `volunteer`, `donor` ou `visitor`) e telefone. Há também uma rota para solicitar recuperação de senha via email. Usuários autenticados podem consultar e atualizar seu próprio perfil (nome, telefone e avatar).
 
 ---
 
 ### Voluntários
 
-🔒 Todas as rotas requerem autenticação. Criação, edição e exclusão requerem papel `admin`.
-
-#### `GET /api/volunteers`
-
-Lista voluntários com paginação e busca.
-
-**Query params:** `page`, `limit`, `search`, `sortBy`, `sortOrder`
-
-#### `GET /api/volunteers/:id`
-
-Retorna um voluntário por ID.
-
-#### `POST /api/volunteers`
-
-🔒 **Requer papel: `admin`**
-
-Cria um novo voluntário.
-
-**Body:**
-```json
-{
-  "name": "Maria Silva",
-  "email": "maria@email.com",
-  "phone": "(11) 99999-0001",
-  "cpf": "123.456.789-00",
-  "birthDate": "1990-05-15",
-  "address": "Rua das Flores, 123",
-  "city": "São Paulo",
-  "state": "SP",
-  "zipCode": "01234-567",
-  "skills": ["educação", "saúde", "informática"],
-  "availability": "Sábados e domingos",
-  "notes": "Observações opcionais",
-  "isActive": true
-}
-```
-
-**Validação:**
-- `name`, `email`, `phone`, `cpf`, `birthDate`, `address`, `city`, `zipCode`, `availability`: obrigatórios
-- `state`: exatamente 2 caracteres (UF)
-- `skills`: array de strings
-- `notes`, `userId`, `isActive`: opcionais
-
-#### `PUT /api/volunteers/:id`
-
-🔒 **Requer papel: `admin`**
-
-Atualiza um voluntário.
-
-#### `DELETE /api/volunteers/:id`
-
-🔒 **Requer papel: `admin`**
-
-Remove um voluntário.
+O gerenciamento de voluntários oferece operações completas de CRUD. Qualquer usuário autenticado pode listar e consultar voluntários, mas apenas administradores podem criar, editar ou excluir registros. O cadastro de um voluntário inclui dados pessoais (nome, email, telefone, CPF, data de nascimento), endereço completo (rua, cidade, UF com 2 caracteres e CEP), além de habilidades (um array de áreas como "educação", "saúde", "informática"), disponibilidade e observações opcionais. A listagem suporta busca textual e ordenação por qualquer campo.
 
 ---
 
 ### Projetos
 
-🔒 Todas as rotas requerem autenticação. Criação, edição e exclusão requerem papel `admin`.
-
-#### `GET /api/projects`
-
-Lista projetos com paginação e busca.
-
-#### `GET /api/projects/:id`
-
-Retorna um projeto por ID.
-
-#### `POST /api/projects`
-
-🔒 **Requer papel: `admin`**
-
-**Body:**
-```json
-{
-  "name": "Educação para Todos",
-  "description": "Projeto de alfabetização para adultos da comunidade",
-  "status": "active",
-  "startDate": "2026-01-15",
-  "endDate": "2026-12-31",
-  "budget": 50000,
-  "raised": 15000,
-  "coordinator": "Dr. Wilson Aquino",
-  "volunteerIds": ["uuid1", "uuid2"],
-  "goals": ["Alfabetizar 100 adultos", "Formar 20 tutores"],
-  "category": "educação",
-  "location": "Centro Comunitário",
-  "beneficiaries": 200,
-  "notes": "Observações opcionais"
-}
-```
-
-**Status possíveis:** `planning`, `active`, `paused`, `completed`, `cancelled`
-
-**Validação:**
-- `name`: mínimo 2 caracteres
-- `description`: mínimo 10 caracteres
-- `coordinator`: mínimo 2 caracteres
-- `volunteerIds`, `goals`: arrays de strings
-
-#### `PUT /api/projects/:id`
-
-🔒 **Requer papel: `admin`**
-
-#### `DELETE /api/projects/:id`
-
-🔒 **Requer papel: `admin`**
+O módulo de projetos permite acompanhar todo o ciclo de vida de cada iniciativa da ONG. Cada projeto possui nome, descrição detalhada, coordenador responsável, categoria, datas de início e término, orçamento planejado versus valor efetivamente arrecadado, metas definidas como lista de objetivos, localização, número de beneficiários e uma lista de voluntários vinculados. O status do projeto pode ser `planning` (planejamento), `active` (ativo), `paused` (pausado), `completed` (concluído) ou `cancelled` (cancelado). A listagem é acessível a todos os autenticados, enquanto criação, edição e exclusão são restritas a administradores.
 
 ---
 
 ### Doações
 
-🔒 Todas as rotas requerem autenticação. Criação requer papel `admin` ou `donor`. Edição e exclusão requer `admin`.
-
-#### `GET /api/donations`
-
-Lista doações com paginação, busca e filtros adicionais.
-
-**Query params extras:**
-
-| Parâmetro | Tipo | Descrição |
-|-----------|------|-----------|
-| `type` | `financial` \| `material` | Filtrar por tipo |
-| `startDate` | string (ISO) | Data inicial |
-| `endDate` | string (ISO) | Data final |
-
-#### `GET /api/donations/:id`
-
-Retorna uma doação por ID.
-
-#### `POST /api/donations`
-
-🔒 **Requer papel: `admin` ou `donor`**
-
-**Body (financeira):**
-```json
-{
-  "donorId": "uuid",
-  "donorName": "Empresa ABC",
-  "type": "financial",
-  "amount": 5000,
-  "description": "Doação mensal para projeto educacional",
-  "date": "2026-03-15",
-  "projectId": "uuid",
-  "projectName": "Educação para Todos",
-  "receiptNumber": "REC-2026-001",
-  "notes": "Observações opcionais"
-}
-```
-
-**Body (material):**
-```json
-{
-  "donorId": "uuid",
-  "donorName": "João da Silva",
-  "type": "material",
-  "description": "Doação de materiais escolares",
-  "items": ["500 cadernos", "1000 lápis", "200 borrachas"],
-  "date": "2026-03-15"
-}
-```
-
-**Tipos possíveis:** `financial`, `material`
-
-#### `PUT /api/donations/:id`
-
-🔒 **Requer papel: `admin`**
-
-#### `DELETE /api/donations/:id`
-
-🔒 **Requer papel: `admin`**
+O sistema controla dois tipos de doação: financeira e material. Doações financeiras registram valor em reais, número de recibo e podem ser vinculadas a um projeto específico. Doações materiais registram uma lista de itens doados (por exemplo, "500 cadernos", "1000 lápis"). Ambas incluem dados do doador (nome e ID), descrição, data e observações opcionais. A listagem aceita filtros adicionais por tipo (`financial` ou `material`) e por intervalo de datas (`startDate` e `endDate`). Qualquer usuário autenticado pode consultar doações, mas o registro pode ser feito por administradores ou doadores. Somente administradores podem editar ou excluir doações existentes.
 
 ---
 
 ### Eventos
 
-🔒 Todas as rotas requerem autenticação. Criação, edição e exclusão requerem papel `admin`.
-
-#### `GET /api/events`
-
-Lista eventos com paginação e busca.
-
-#### `GET /api/events/upcoming`
-
-Retorna próximos eventos (ordenados por data).
-
-#### `GET /api/events/:id`
-
-Retorna um evento por ID.
-
-#### `POST /api/events`
-
-🔒 **Requer papel: `admin`**
-
-**Body:**
-```json
-{
-  "name": "Mutirão de Limpeza",
-  "description": "Mutirão de limpeza e revitalização do parque municipal",
-  "status": "scheduled",
-  "date": "2026-04-10",
-  "startTime": "08:00",
-  "endTime": "12:00",
-  "location": "Parque Municipal Wilson Aquino",
-  "maxParticipants": 50,
-  "participantIds": [],
-  "category": "meio ambiente",
-  "projectId": "uuid",
-  "projectName": "Horta Comunitária",
-  "notes": "Observações opcionais"
-}
-```
-
-**Status possíveis:** `scheduled`, `in_progress`, `completed`, `cancelled`
-
-**Validação:**
-- `name`: mínimo 2 caracteres
-- `description`: mínimo 10 caracteres
-- `location`: mínimo 2 caracteres
-
-#### `PUT /api/events/:id`
-
-🔒 **Requer papel: `admin`**
-
-#### `DELETE /api/events/:id`
-
-🔒 **Requer papel: `admin`**
-
-#### `POST /api/events/:id/participants`
-
-🔒 **Requer papel: `admin` ou `volunteer`**
-
-Adiciona um participante ao evento.
-
-**Body:**
-```json
-{
-  "volunteerId": "uuid"
-}
-```
-
-#### `DELETE /api/events/:id/participants/:volunteerId`
-
-🔒 **Requer papel: `admin`**
-
-Remove um participante do evento.
+Eventos representam atividades programadas pela ONG, como mutirões, palestras ou workshops. Cada evento possui nome, descrição, data e horários de início e término, local, categoria, número máximo de participantes e pode ser vinculado a um projeto. O status progride entre `scheduled` (agendado), `in_progress` (em andamento), `completed` (concluído) e `cancelled` (cancelado). Existe uma rota dedicada que retorna os próximos eventos ordenados por data. Administradores e voluntários podem adicionar participantes a um evento; somente administradores podem remover participantes ou gerenciar (criar, editar, excluir) os eventos em si.
 
 ---
 
 ### Dashboard
 
-#### `GET /api/dashboard/summary`
-
-🔒 **Requer autenticação**
-
-Retorna resumo completo para o painel.
-
-**Resposta:**
-```json
-{
-  "success": true,
-  "data": {
-    "totalVolunteers": 8,
-    "activeVolunteers": 7,
-    "totalDonations": 8,
-    "totalDonationAmount": 85500,
-    "activeProjects": 3,
-    "totalProjects": 5,
-    "upcomingEvents": 3,
-    "totalEvents": 5,
-    "recentDonations": [],
-    "recentVolunteers": [],
-    "upcomingEventsList": [],
-    "donationsByMonth": [
-      { "month": "Jan", "amount": 15000 },
-      { "month": "Fev", "amount": 8500 }
-    ],
-    "volunteersByMonth": [
-      { "month": "Jan", "count": 3 },
-      { "month": "Fev", "count": 2 }
-    ],
-    "projectsByStatus": {
-      "planning": 1,
-      "active": 3,
-      "completed": 1
-    }
-  }
-}
-```
+O painel de controle oferece uma visão consolidada de toda a operação da ONG através de uma única rota. A resposta inclui contadores gerais (total e ativos de voluntários, total de doações com soma dos valores financeiros, projetos ativos versus total, eventos próximos), listas dos registros mais recentes (últimas doações, últimos voluntários cadastrados e próximos eventos), além de dados mensais para gráficos: valores de doações por mês e quantidade de novos voluntários por mês. Também retorna a distribuição de projetos por status (quantos em planejamento, ativos e concluídos). Qualquer usuário autenticado tem acesso ao dashboard.
 
 ---
 
 ### Relatórios
 
-#### `GET /api/reports/:type`
-
-🔒 **Requer papel: `admin`**
-
-Gera relatórios por tipo.
-
-**Tipos disponíveis:** `volunteers`, `donations`, `projects`, `events`
-
-**Query params:**
-
-| Parâmetro | Valor | Descrição |
-|-----------|-------|-----------|
-| `format` | `json` (padrão) | Retorna dados em JSON |
-| `format` | `csv` | Download do arquivo CSV |
-| `startDate` | string (ISO) | Filtro de data inicial |
-| `endDate` | string (ISO) | Filtro de data final |
-
-**Exemplos:**
-
-```
-GET /api/reports/donations?format=json
-GET /api/reports/volunteers?format=csv
-GET /api/reports/projects?startDate=2026-01-01&endDate=2026-12-31
-```
+O módulo de relatórios permite a geração de relatórios para cada entidade do sistema: voluntários, doações, projetos e eventos. Os relatórios podem ser exportados em dois formatos — JSON para consumo programático ou CSV para download e análise em planilhas. É possível filtrar os dados por período usando parâmetros de data inicial e final. Somente administradores têm acesso à geração de relatórios.
 
 ---
 
 ### Backups
 
-#### `GET /api/backups`
-
-🔒 **Requer papel: `admin`**
-
-Lista todos os backups disponíveis.
-
-#### `POST /api/backups`
-
-🔒 **Requer papel: `admin`**
-
-Cria um novo backup de todos os dados (copia os arquivos JSON para diretório com timestamp).
-
-#### `POST /api/backups/restore/:backupName`
-
-🔒 **Requer papel: `admin`**
-
-Restaura dados a partir de um backup específico.
+O sistema de backups permite que administradores criem cópias de segurança de todos os dados armazenados. Cada backup copia os arquivos JSON do banco de dados para um diretório com timestamp, permitindo rastrear o momento exato de cada cópia. É possível listar todos os backups disponíveis e restaurar os dados a partir de qualquer backup específico, sobrescrevendo os dados atuais com o estado salvo anteriormente.
 
 ---
 
 ### Health Check
 
-#### `GET /health`
-
-⚡ **Sem autenticação**
-
-Verifica se o servidor está ativo.
-
-**Resposta:**
-```json
-{
-  "status": "ok",
-  "timestamp": "2026-03-16T12:00:00.000Z"
-}
-```
+A rota de verificação de saúde (`GET /health`) está disponível sem autenticação e retorna o status do servidor junto com o timestamp atual. Ela é utilizada pelo Render para monitorar se o serviço está ativo e responsivo.
 
 ---
 
