@@ -5,18 +5,14 @@ services:
     region: oregon
     plan: free
     rootDir: backend
+    nodeVersion: "20"
     buildCommand: npm install && npm run build
     startCommand: npm start
+    healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: "3001"
       - key: JWT_SECRET
         generateValue: true
       - key: CORS_ORIGIN
         value: "https://clayton79.github.io"
-      - key: DATA_DIR
-        value: /opt/render/project/src/backend/data
-      - key: BACKUP_DIR
-        value: /opt/render/project/src/backend/backups
