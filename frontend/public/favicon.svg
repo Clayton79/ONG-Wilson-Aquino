@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="12" fill="#1B6B3A"/>
+  <text x="32" y="28" text-anchor="middle" font-family="serif" font-size="18" font-weight="bold" fill="white" font-style="italic">W</text>
+  <text x="38" y="28" text-anchor="middle" font-family="serif" font-size="18" font-weight="bold" fill="white" font-style="italic">A</text>
+  <line x1="20" y1="34" x2="44" y2="34" stroke="#C8A951" stroke-width="1"/>
+  <text x="32" y="46" text-anchor="middle" font-family="sans-serif" font-size="5" fill="white" letter-spacing="2">EDUCAÇÃO &amp; SAÚDE</text>
+</svg>
