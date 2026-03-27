@@ -27,7 +27,7 @@ app.use(errorHandler);
 
 // Start server
 app.listen(config.port, '0.0.0.0', () => {
-  console.log(`\n🚀 ONG Wilson Aquino API`);
+  console.log(`\n\ud83d\ude80 CUFA Pernambuco API`);
   console.log(`   Server running on port ${config.port}`);
   console.log(`   CORS origin: ${config.corsOrigin}`);
   console.log(`   Data directory: ${config.dataDir}\n`);

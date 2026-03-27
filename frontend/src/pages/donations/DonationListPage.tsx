@@ -76,6 +76,9 @@ export function DonationListPage() {
               { value: '', label: 'Todos os tipos' },
               { value: 'financial', label: 'Financeira' },
               { value: 'material', label: 'Material' },
+              { value: 'food', label: 'Alimento' },
+              { value: 'clothing', label: 'Roupa' },
+              { value: 'other', label: 'Outro' },
             ]}
           />
           <Button type="submit" variant="secondary">Buscar</Button>
@@ -110,7 +113,7 @@ export function DonationListPage() {
                         <Badge variant={don.type === 'financial' ? 'success' : 'info'}>
                           <span className="inline-flex items-center gap-1">
                             {don.type === 'financial' ? <DollarSign className="w-3 h-3" /> : <Package className="w-3 h-3" />}
-                            {don.type === 'financial' ? 'Financeira' : 'Material'}
+                            {{ financial: 'Financeira', material: 'Material', food: 'Alimento', clothing: 'Roupa', other: 'Outro' }[don.type] || don.type}
                           </span>
                         </Badge>
                       </td>

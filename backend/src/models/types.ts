@@ -1,5 +1,5 @@
 // ============================================================
-// ONG Wilson Aquino — Shared Type Definitions
+// CUFA Pernambuco — Shared Type Definitions
 // ============================================================
 
 // ---- Enums ----
@@ -20,8 +20,11 @@ export enum ProjectStatus {
 }
 
 export enum DonationType {
+  FOOD = 'food',
+  CLOTHING = 'clothing',
   FINANCIAL = 'financial',
   MATERIAL = 'material',
+  OTHER = 'other',
 }
 
 export enum EventStatus {
@@ -159,6 +162,8 @@ export interface Participation extends BaseEntity {
 export interface DashboardSummary {
   totalVolunteers: number;
   activeVolunteers: number;
+  totalDonors: number;
+  activeDonors: number;
   totalDonations: number;
   totalDonationAmount: number;
   activeProjects: number;
@@ -169,6 +174,7 @@ export interface DashboardSummary {
   recentVolunteers: Volunteer[];
   upcomingEventsList: OngEvent[];
   donationsByMonth: { month: string; amount: number }[];
+  donationsByType: { type: string; count: number; amount: number }[];
   volunteersByMonth: { month: string; count: number }[];
   projectsByStatus: { status: string; count: number }[];
 }

@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-  base: '/ONG-Wilson-Aquino/',
+  base: '/ONG-Wilson-Aquino/',  // keep repo name for GitHub Pages
   plugins: [react()],
   resolve: {
     alias: {

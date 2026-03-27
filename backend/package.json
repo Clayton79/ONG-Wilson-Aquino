@@ -1,7 +1,7 @@
 {
-  "name": "ong-wilson-aquino-backend",
+  "name": "cufa-pernambuco-backend",
   "version": "1.0.0",
-  "description": "Backend API for ONG Wilson Aquino management system",
+  "description": "Backend API for CUFA Pernambuco management system",
   "main": "dist/index.js",
   "engines": {
     "node": ">=18.0.0"

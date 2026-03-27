@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   Users,
   Heart,
+  UserCheck,
   FolderKanban,
   Calendar,
   TrendingUp,
@@ -24,7 +25,7 @@ import { dashboardApi } from '../../shared/services';
 import { useAuthStore } from '../../shared/stores';
 import type { DashboardSummary } from '../../shared/types';
 
-const CHART_COLORS = ['#1B6B3A', '#2E8B57', '#57AB82', '#89C8A8', '#B9DFCA'];
+const CHART_COLORS = ['#0F7A3B', '#14A150', '#57AB82', '#89C8A8', '#B9DFCA'];
 
 const statusLabels: Record<string, string> = {
   planning: 'Planejamento',
@@ -70,6 +71,14 @@ export function DashboardPage() {
       bg: 'bg-primary-50',
     },
     {
+      label: 'Doadores',
+      value: summary.totalDonors,
+      subLabel: `${summary.activeDonors} ativos`,
+      icon: UserCheck,
+      color: 'text-emerald-600',
+      bg: 'bg-emerald-50',
+    },
+    {
       label: 'Doações',
       value: summary.totalDonations,
       subLabel: `R$ ${summary.totalDonationAmount.toLocaleString('pt-BR')}`,
@@ -101,12 +110,12 @@ export function DashboardPage() {
       <div>
         <h1 className="page-title">Dashboard</h1>
         <p className="page-subtitle">
-          Bem-vindo(a), {user?.name}! Aqui está o resumo da ONG.
+          Bem-vindo(a), {user?.name}! Aqui está o resumo da CUFA.
         </p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {stats.map((stat) => (
           <Card key={stat.label} className="relative overflow-hidden">
             <div className="flex items-start justify-between">
@@ -157,7 +166,7 @@ export function DashboardPage() {
                   formatter={(value: number) => [`R$ ${value.toLocaleString('pt-BR')}`, 'Valor']}
                   contentStyle={{ borderRadius: '8px', border: '1px solid #E5E7EB' }}
                 />
-                <Bar dataKey="amount" fill="#1B6B3A" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="amount" fill="#0F7A3B" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

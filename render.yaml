@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: ong-wilson-aquino-api
+    name: cufa-pernambuco-api
     runtime: node
     region: oregon
     plan: free

@@ -4,6 +4,7 @@ import type {
   AuthSession,
   PaginatedResponse,
   Volunteer,
+  Donor,
   Project,
   Donation,
   OngEvent,
@@ -35,6 +36,22 @@ export const volunteerApi = {
     api.put<ApiResponse<Volunteer>>(`/volunteers/${id}`, data),
   delete: (id: string) =>
     api.delete<ApiResponse<void>>(`/volunteers/${id}`),
+};
+
+// ---- Donors ----
+export const donorApi = {
+  getAll: (params?: string) =>
+    api.get<PaginatedResponse<Donor>>(`/donors${params ? `?${params}` : ''}`),
+  getById: (id: string) =>
+    api.get<ApiResponse<Donor>>(`/donors/${id}`),
+  getActive: () =>
+    api.get<ApiResponse<Donor[]>>('/donors/active'),
+  create: (data: Record<string, unknown>) =>
+    api.post<ApiResponse<Donor>>('/donors', data),
+  update: (id: string, data: Record<string, unknown>) =>
+    api.put<ApiResponse<Donor>>(`/donors/${id}`, data),
+  delete: (id: string) =>
+    api.delete<ApiResponse<void>>(`/donors/${id}`),
 };
 
 // ---- Projects ----

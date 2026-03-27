@@ -1,5 +1,6 @@
 export { authController } from './authController';
 export { volunteerController } from './volunteerController';
+export { donorController } from './donorController';
 export { projectController } from './projectController';
 export { donationController } from './donationController';
 export { eventController } from './eventController';

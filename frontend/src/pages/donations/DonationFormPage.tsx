@@ -10,7 +10,7 @@ import { donationApi } from '../../shared/services';
 const donationFormSchema = z.object({
   donorName: z.string().min(3, 'Nome do doador deve ter pelo menos 3 caracteres'),
   donorId: z.string().optional(),
-  type: z.enum(['financial', 'material']),
+  type: z.enum(['food', 'clothing', 'financial', 'material', 'other']),
   amount: z.coerce.number().optional(),
   description: z.string().min(3, 'Descrição obrigatória'),
   date: z.string().min(1, 'Data obrigatória'),
@@ -47,6 +47,7 @@ export function DonationFormPage() {
   });
 
   const donationType = watch('type');
+  const showAmount = donationType === 'financial';
 
   useEffect(() => { if (isEditing) loadDonation(); }, [id]);
 
@@ -108,11 +109,14 @@ export function DonationFormPage() {
                 options={[
                   { value: 'financial', label: 'Financeira' },
                   { value: 'material', label: 'Material' },
+                  { value: 'food', label: 'Alimento' },
+                  { value: 'clothing', label: 'Roupa' },
+                  { value: 'other', label: 'Outro' },
                 ]} {...register('type')} />
               <Input label="Data *" type="date" error={errors.date?.message} {...register('date')} />
             </div>
 
-            {donationType === 'financial' && (
+            {showAmount && (
               <Input label="Valor (R$) *" type="number" step="0.01" error={errors.amount?.message}
                 {...register('amount', { valueAsNumber: true })} placeholder="0.00" />
             )}

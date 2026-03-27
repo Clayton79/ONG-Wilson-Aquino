@@ -1,12 +1,14 @@
-import { volunteerRepository, donationRepository, projectRepository, eventRepository } from '../repositories';
+import { volunteerRepository, donorRepository, donationRepository, projectRepository, eventRepository } from '../repositories';
 
-type ReportType = 'volunteers' | 'donations' | 'projects' | 'events';
+type ReportType = 'volunteers' | 'donors' | 'donations' | 'projects' | 'events';
 
 export class ReportService {
   async generateReport(type: ReportType, filters?: Record<string, string>) {
     switch (type) {
       case 'volunteers':
         return this.volunteerReport(filters);
+      case 'donors':
+        return this.donorReport(filters);
       case 'donations':
         return this.donationReport(filters);
       case 'projects':
@@ -28,6 +30,22 @@ export class ReportService {
     }
     return {
       title: 'Relatório de Voluntários',
+      generatedAt: new Date().toISOString(),
+      total: data.length,
+      data,
+    };
+  }
+
+  private async donorReport(filters?: Record<string, string>) {
+    let data = await donorRepository.findAll();
+    if (filters?.isActive !== undefined) {
+      data = data.filter((d) => d.isActive === (filters.isActive === 'true'));
+    }
+    if (filters?.type) {
+      data = data.filter((d) => d.type === filters.type);
+    }
+    return {
+      title: 'Relatório de Doadores',
       generatedAt: new Date().toISOString(),
       total: data.length,
       data,

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import authRoutes from './authRoutes';
 import volunteerRoutes from './volunteerRoutes';
+import donorRoutes from './donorRoutes';
 import projectRoutes from './projectRoutes';
 import donationRoutes from './donationRoutes';
 import eventRoutes from './eventRoutes';
@@ -14,7 +15,7 @@ const router = Router();
 router.get('/', (_req, res) => {
   res.json({
     success: true,
-    message: 'ONG Wilson Aquino API',
+    message: 'CUFA Pernambuco API',
     version: '1.0.0',
     endpoints: {
       auth: {
@@ -30,6 +31,14 @@ router.get('/', (_req, res) => {
         'POST /api/volunteers': 'Criar voluntário (admin)',
         'PUT /api/volunteers/:id': 'Atualizar voluntário (admin)',
         'DELETE /api/volunteers/:id': 'Remover voluntário (admin)',
+      },
+      donors: {
+        'GET /api/donors': 'Listar doadores (auth)',
+        'GET /api/donors/active': 'Listar doadores ativos (auth)',
+        'GET /api/donors/:id': 'Buscar doador (auth)',
+        'POST /api/donors': 'Criar doador (admin)',
+        'PUT /api/donors/:id': 'Atualizar doador (admin)',
+        'DELETE /api/donors/:id': 'Remover doador (admin)',
       },
       projects: {
         'GET /api/projects': 'Listar projetos (auth)',
@@ -59,7 +68,7 @@ router.get('/', (_req, res) => {
         'GET /api/dashboard/summary': 'Resumo do painel (auth)',
       },
       reports: {
-        'GET /api/reports/:type': 'Gerar relatório - types: volunteers, donations, projects, events (admin)',
+        'GET /api/reports/:type': 'Gerar relatório - types: volunteers, donors, donations, projects, events (admin)',
       },
       backups: {
         'GET /api/backups': 'Listar backups (admin)',
@@ -72,6 +81,7 @@ router.get('/', (_req, res) => {
 
 router.use('/auth', authRoutes);
 router.use('/volunteers', volunteerRoutes);
+router.use('/donors', donorRoutes);
 router.use('/projects', projectRoutes);
 router.use('/donations', donationRoutes);
 router.use('/events', eventRoutes);
