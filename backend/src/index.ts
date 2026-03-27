@@ -6,11 +6,26 @@ import { errorHandler } from './middlewares';
 
 const app = express();
 
-// Global middleware
+// ---- CORS ----
+const allowedOrigins = config.corsOrigin.split(',').map(s => s.trim());
+
 app.use(cors({
-  origin: config.corsOrigin.split(',').map(s => s.trim()),
+  origin(origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, health checks)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.some(allowed => origin === allowed || origin.startsWith(allowed))) {
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+// Explicit preflight for all routes
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

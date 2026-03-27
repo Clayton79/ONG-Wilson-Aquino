@@ -8,6 +8,7 @@ import eventRoutes from './eventRoutes';
 import dashboardRoutes from './dashboardRoutes';
 import reportRoutes from './reportRoutes';
 import backupRoutes from './backupRoutes';
+import { projectController, eventController } from '../controllers';
 
 const router = Router();
 
@@ -88,5 +89,9 @@ router.use('/events', eventRoutes);
 router.use('/dashboard', dashboardRoutes);
 router.use('/reports', reportRoutes);
 router.use('/backups', backupRoutes);
+
+// ---- Public endpoints (no auth required) ----
+router.get('/public/projects', (req, res) => projectController.getAll(req, res));
+router.get('/public/events', (req, res) => eventController.getAll(req, res));
 
 export default router;

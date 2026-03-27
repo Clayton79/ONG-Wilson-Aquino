@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FolderKanban, MapPin, Users } from 'lucide-react';
-import { projectApi } from '../../shared/services';
-import type { Project } from '../../shared/types';
+import { api } from '../../shared/services/api';
+import type { Project, PaginatedResponse } from '../../shared/types';
 
 const statusLabels: Record<string, string> = {
   planning: 'Planejamento',
@@ -26,7 +26,7 @@ export function PublicProjectsPage() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await projectApi.getAll('limit=50');
+        const response = await api.get<PaginatedResponse<Project>>('/public/projects?limit=50');
         setProjects(response.data ?? []);
       } catch { /* ignored */ }
       finally { setIsLoading(false); }

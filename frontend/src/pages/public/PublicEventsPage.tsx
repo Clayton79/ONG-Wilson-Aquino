@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MapPin, Clock, Users } from 'lucide-react';
-import { eventApi } from '../../shared/services';
-import type { OngEvent } from '../../shared/types';
+import { api } from '../../shared/services/api';
+import type { OngEvent, PaginatedResponse } from '../../shared/types';
 
 const statusLabels: Record<string, string> = {
   scheduled: 'Agendado',
@@ -24,7 +24,7 @@ export function PublicEventsPage() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await eventApi.getAll('limit=50');
+        const response = await api.get<PaginatedResponse<OngEvent>>('/public/events?limit=50');
         setEvents(response.data ?? []);
       } catch { /* ignored */ }
       finally { setIsLoading(false); }

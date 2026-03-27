@@ -6,6 +6,6 @@ O **frontend** foi construído com **React 18 + TypeScript + Tailwind CSS**, uti
 
 A aplicação está em produção com deploy frontend no **GitHub Pages** via GitHub Actions e backend no **Render**.
 
-🔗 **Acesse a aplicação:** [https://clayton79.github.io/ONG-Wilson-Aquino/](https://clayton79.github.io/ONG-Wilson-Aquino/)
+🔗 **Acesse a aplicação:** [https://clayton79.github.io/Cufa-Pernambuco-Oficial/](https://clayton79.github.io/Cufa-Pernambuco-Oficial/)
 
 > **Credenciais de teste:** `admin@cufape.org.br` / `admin123`

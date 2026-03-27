@@ -1,5 +1,5 @@
 const API_BASE = import.meta.env.PROD
-  ? 'https://cufa-pernambuco-api.onrender.com/api'
+  ? 'https://ong-wilson-aquino-api.onrender.com/api'
   : '/api';
 
 async function request<T>(
