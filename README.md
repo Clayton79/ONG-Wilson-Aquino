@@ -1,10 +1,20 @@
-# CUFA Pernambuco — Documentação da API
+# CUFA Pernambuco — Sistema de Gestão
 
-API RESTful do sistema de gestão da CUFA Pernambuco (Central Única das Favelas).
+Sistema web completo para gerenciamento das operações da **CUFA Pernambuco** (Central Única das Favelas). Inclui painel administrativo com dashboard, controle de voluntários, doadores, doações, projetos e eventos, além de área pública institucional.
 
-**Base URL:** `https://ong-wilson-aquino-api.onrender.com/api`
+| | Tecnologia |
+|---|---|
+| **Frontend** | React 18 · TypeScript · Tailwind CSS · Zustand · React Hook Form · Zod · Recharts |
+| **Backend** | Node.js · Express · TypeScript · JWT · Zod · JSON file storage |
+| **Deploy** | GitHub Pages (frontend) · Render (backend) |
+
+🔗 **Aplicação:** [https://clayton79.github.io/Cufa-Pernambuco-Oficial/](https://clayton79.github.io/Cufa-Pernambuco-Oficial/)
+
+**Base URL da API:** `https://ong-wilson-aquino-api.onrender.com/api`
 
 ---
+
+## Documentação da API
 
 ## Autenticação
 
