@@ -59,7 +59,7 @@ export function HomePage() {
             {highlights.map((item) => (
               <div
                 key={item.label}
-                className="bg-white rounded-xl border border-border p-6 text-center hover:shadow-md transition-shadow"
+                className="bg-surface rounded-xl border border-border p-6 text-center hover:shadow-md transition-shadow"
               >
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <item.icon className="w-6 h-6 text-primary" />

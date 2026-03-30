@@ -90,7 +90,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className={`relative bg-white rounded-2xl shadow-xl ${sizeClasses[size]} w-full mx-4 max-h-[90vh] flex flex-col animate-fade-in outline-none`}
+        className={`relative bg-surface rounded-2xl shadow-xl ${sizeClasses[size]} w-full mx-4 max-h-[90vh] flex flex-col animate-fade-in outline-none`}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-border">
@@ -98,7 +98,8 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
           <button
             onClick={onClose}
             aria-label="Fechar"
-            className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+            title="Fechar"
+            className="p-1.5 rounded-lg hover:bg-surface-hover transition-colors"
           >
             <X className="w-5 h-5 text-muted" aria-hidden="true" />
           </button>

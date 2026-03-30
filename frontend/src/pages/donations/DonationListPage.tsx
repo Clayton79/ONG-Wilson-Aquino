@@ -134,10 +134,10 @@ export function DonationListPage() {
                       </td>
                       <td>
                         <div className="flex items-center justify-end gap-1">
-                          <Button variant="ghost" size="sm" onClick={() => navigate(`/donations/${don.id}/edit`)} aria-label="Editar">
+                          <Button variant="ghost" size="sm" onClick={() => navigate(`/donations/${don.id}/edit`)} aria-label="Editar" title="Editar">
                             <Edit className="w-4 h-4" aria-hidden="true" />
                           </Button>
-                          <Button variant="ghost" size="sm" onClick={() => setDeleteId(don.id)} aria-label="Excluir">
+                          <Button variant="ghost" size="sm" onClick={() => setDeleteId(don.id)} aria-label="Excluir" title="Excluir">
                             <Trash2 className="w-4 h-4 text-danger" aria-hidden="true" />
                           </Button>
                         </div>

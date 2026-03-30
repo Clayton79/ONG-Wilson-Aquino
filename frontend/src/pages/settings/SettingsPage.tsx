@@ -187,12 +187,12 @@ export function SettingsPage() {
           </div>
 
           {backups.length === 0 ? (
-            <p className="text-sm text-gray-500">Nenhum backup encontrado.</p>
+            <p className="text-sm text-muted">Nenhum backup encontrado.</p>
           ) : (
-            <div className="divide-y divide-gray-100 border rounded-lg">
+            <div className="divide-y divide-border-light border border-border rounded-lg">
               {backups.map((name) => (
                 <div key={name} className="flex items-center justify-between p-3 text-sm">
-                  <span className="font-mono text-gray-700 truncate">{name}</span>
+                  <span className="font-mono text-foreground truncate">{name}</span>
                   <Button variant="ghost" size="sm" onClick={() => setRestoreTarget(name)}>
                     <Upload className="w-4 h-4 mr-1" /> Restaurar
                   </Button>

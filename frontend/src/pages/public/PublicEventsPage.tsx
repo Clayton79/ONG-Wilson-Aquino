@@ -60,7 +60,7 @@ export function PublicEventsPage() {
               const day = date.getDate().toString().padStart(2, '0');
               const month = date.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '');
               return (
-                <div key={event.id} className="bg-white rounded-xl border border-border overflow-hidden hover:shadow-md transition-shadow flex">
+                <div key={event.id} className="bg-surface rounded-xl border border-border overflow-hidden hover:shadow-md transition-shadow flex">
                   {/* Date column */}
                   <div className="w-20 shrink-0 bg-primary/5 flex flex-col items-center justify-center border-r border-border">
                     <span className="text-2xl font-bold text-primary">{day}</span>

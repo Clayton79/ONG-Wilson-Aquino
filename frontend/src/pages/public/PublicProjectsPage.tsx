@@ -58,7 +58,7 @@ export function PublicProjectsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
-              <div key={project.id} className="bg-white rounded-xl border border-border overflow-hidden hover:shadow-md transition-shadow">
+              <div key={project.id} className="bg-surface rounded-xl border border-border overflow-hidden hover:shadow-md transition-shadow">
                 <div className="h-2 bg-primary" />
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-3 mb-3">

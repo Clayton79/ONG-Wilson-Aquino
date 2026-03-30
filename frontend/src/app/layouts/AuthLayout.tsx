@@ -41,7 +41,7 @@ export function AuthLayout() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8 border border-border">
+          <div className="bg-surface rounded-2xl shadow-xl p-8 border border-border">
             <Outlet />
           </div>
         </div>

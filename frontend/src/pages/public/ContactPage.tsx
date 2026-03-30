@@ -28,7 +28,7 @@ export function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
           {/* Info cards */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-xl border border-border p-6">
+            <div className="bg-surface rounded-xl border border-border p-6">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <MapPin className="w-5 h-5 text-primary" />
               </div>
@@ -36,7 +36,7 @@ export function ContactPage() {
               <p className="mt-1 text-sm text-muted">Recife, PE — Brasil</p>
             </div>
 
-            <div className="bg-white rounded-xl border border-border p-6">
+            <div className="bg-surface rounded-xl border border-border p-6">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Mail className="w-5 h-5 text-primary" />
               </div>
@@ -44,7 +44,7 @@ export function ContactPage() {
               <p className="mt-1 text-sm text-muted">contato@cufape.org.br</p>
             </div>
 
-            <div className="bg-white rounded-xl border border-border p-6">
+            <div className="bg-surface rounded-xl border border-border p-6">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Phone className="w-5 h-5 text-primary" />
               </div>
@@ -56,7 +56,7 @@ export function ContactPage() {
           {/* Form */}
           <div className="lg:col-span-3">
             {submitted ? (
-              <div className="bg-white rounded-xl border border-border p-10 text-center">
+              <div className="bg-surface rounded-xl border border-border p-10 text-center">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Send className="w-7 h-7 text-primary" />
                 </div>
@@ -72,7 +72,7 @@ export function ContactPage() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-border p-6 space-y-5">
+              <form onSubmit={handleSubmit} className="bg-surface rounded-xl border border-border p-6 space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="contact-name" className="block text-sm font-medium text-foreground mb-1.5">Nome *</label>

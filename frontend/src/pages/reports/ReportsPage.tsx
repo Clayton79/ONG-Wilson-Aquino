@@ -93,12 +93,12 @@ export function ReportsPage() {
           >
             <div className="flex flex-col items-center text-center gap-2 py-2">
               <div className={`p-2 rounded-lg ${
-                selectedType === rt.type ? 'bg-primary-100 text-primary-600' : 'bg-gray-100 text-gray-500'
+                selectedType === rt.type ? 'bg-primary-100 text-primary-600' : 'bg-muted-bg text-muted'
               }`}>
                 {rt.icon}
               </div>
               <h3 className="font-semibold text-sm">{rt.label}</h3>
-              <p className="text-xs text-gray-500">{rt.description}</p>
+              <p className="text-xs text-muted">{rt.description}</p>
             </div>
           </Card>
         ))}
@@ -137,7 +137,7 @@ export function ReportsPage() {
         <Card>
           <CardHeader title={`Relatório — ${reportTypes.find(r => r.type === selectedType)?.label}`} />
           <div className="overflow-x-auto">
-            <pre className="text-xs font-mono bg-gray-50 p-4 rounded-lg overflow-auto max-h-[500px] whitespace-pre-wrap">
+            <pre className="text-xs font-mono bg-surface-hover p-4 rounded-lg overflow-auto max-h-[500px] whitespace-pre-wrap">
               {JSON.stringify(reportData, null, 2)}
             </pre>
           </div>
@@ -146,7 +146,7 @@ export function ReportsPage() {
 
       {!reportData && !isGenerating && !error && (
         <Card>
-          <div className="flex flex-col items-center justify-center py-12 text-gray-400">
+          <div className="flex flex-col items-center justify-center py-12 text-muted">
             <FileText className="w-12 h-12 mb-3" />
             <p className="text-sm">Selecione um tipo de relatório e clique em &quot;Gerar&quot;.</p>
           </div>

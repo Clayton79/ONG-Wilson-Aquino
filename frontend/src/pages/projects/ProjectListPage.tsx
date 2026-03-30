@@ -113,13 +113,13 @@ export function ProjectListPage() {
                   <div className="flex items-start justify-between mb-3">
                     <Badge variant={cfg.variant}>{cfg.label}</Badge>
                     <div className="flex gap-1">
-                      <Button variant="ghost" size="sm" onClick={() => navigate(`/projects/${project.id}`)} aria-label="Ver detalhes">
+                      <Button variant="ghost" size="sm" onClick={() => navigate(`/projects/${project.id}`)} aria-label="Ver detalhes" title="Ver detalhes">
                         <Eye className="w-4 h-4" aria-hidden="true" />
                       </Button>
-                      <Button variant="ghost" size="sm" onClick={() => navigate(`/projects/${project.id}/edit`)} aria-label="Editar">
+                      <Button variant="ghost" size="sm" onClick={() => navigate(`/projects/${project.id}/edit`)} aria-label="Editar" title="Editar">
                         <Edit className="w-4 h-4" aria-hidden="true" />
                       </Button>
-                      <Button variant="ghost" size="sm" onClick={() => setDeleteId(project.id)} aria-label="Excluir">
+                      <Button variant="ghost" size="sm" onClick={() => setDeleteId(project.id)} aria-label="Excluir" title="Excluir">
                         <Trash2 className="w-4 h-4 text-danger" aria-hidden="true" />
                       </Button>
                     </div>

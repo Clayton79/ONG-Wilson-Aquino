@@ -91,6 +91,7 @@ export function Sidebar() {
         <button
           onClick={handleLogout}
           aria-label="Sair"
+          title="Sair"
           className={clsx(
             'flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-sidebar-text hover:bg-sidebar-hover hover:text-white transition-all duration-200',
             collapsed && 'justify-center px-2'
@@ -104,6 +105,7 @@ export function Sidebar() {
         <button
           onClick={() => setCollapsed(!collapsed)}
           aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
+          title={collapsed ? 'Expandir menu' : 'Recolher menu'}
           className="hidden lg:flex items-center justify-center w-full py-2 rounded-lg text-sidebar-text hover:bg-sidebar-hover hover:text-white transition-all"
         >
           {collapsed ? (
@@ -122,6 +124,7 @@ export function Sidebar() {
       <button
         onClick={() => setMobileOpen(true)}
         aria-label="Abrir menu"
+        title="Abrir menu"
         className="lg:hidden fixed top-4 left-4 z-40 p-2 rounded-lg bg-black text-white shadow-lg"
       >
         <Menu className="w-5 h-5" aria-hidden="true" />
@@ -138,6 +141,7 @@ export function Sidebar() {
             <button
               onClick={() => setMobileOpen(false)}
               aria-label="Fechar menu"
+              title="Fechar menu"
               className="absolute top-4 right-4 p-1 rounded-lg text-white/70 hover:text-white"
             >
               <X className="w-5 h-5" aria-hidden="true" />

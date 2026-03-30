@@ -118,12 +118,12 @@ export function EventListPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex-1 min-w-0 space-y-1">
                     <div className="flex items-center gap-3 flex-wrap">
-                      <h3 className="font-semibold text-gray-900 truncate">{event.name}</h3>
+                      <h3 className="font-semibold text-foreground truncate">{event.name}</h3>
                       <Badge variant={sc.variant}>{sc.label}</Badge>
                       <Badge variant="neutral">{event.category}</Badge>
                     </div>
-                    <p className="text-sm text-gray-500 line-clamp-1">{event.description}</p>
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                    <p className="text-sm text-muted line-clamp-1">{event.description}</p>
+                    <div className="flex flex-wrap gap-4 text-sm text-muted">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5" /> {fmtDate(event.date)} {event.startTime} - {event.endTime}
                       </span>
@@ -136,13 +136,13 @@ export function EventListPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
-                    <Button variant="ghost" size="sm" onClick={() => navigate(`/events/${event.id}`)} aria-label="Ver detalhes">
+                    <Button variant="ghost" size="sm" onClick={() => navigate(`/events/${event.id}`)} aria-label="Ver detalhes" title="Ver detalhes">
                       <Eye className="w-4 h-4" aria-hidden="true" />
                     </Button>
-                    <Button variant="ghost" size="sm" onClick={() => navigate(`/events/${event.id}/edit`)} aria-label="Editar">
+                    <Button variant="ghost" size="sm" onClick={() => navigate(`/events/${event.id}/edit`)} aria-label="Editar" title="Editar">
                       <Edit className="w-4 h-4" aria-hidden="true" />
                     </Button>
-                    <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(event)} aria-label="Excluir">
+                    <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(event)} aria-label="Excluir" title="Excluir">
                       <Trash2 className="w-4 h-4 text-red-500" aria-hidden="true" />
                     </Button>
                   </div>

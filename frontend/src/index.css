@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme tokens (CSS custom properties) ── */
+:root {
+  --bg: 246 248 246;
+  --fg: 17 17 17;
+  --surface: 255 255 255;
+  --surface-hover: 249 250 251;
+  --muted: 107 114 128;
+  --muted-fg: 107 114 128;
+  --muted-bg: 221 229 221;
+  --brd: 132 148 132;
+  --brd-light: 229 231 235;
+  --scrollbar: 168 180 168;
+  --scrollbar-hover: 132 148 132;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 18 18 18;
+    --fg: 229 229 229;
+    --surface: 26 26 26;
+    --surface-hover: 37 37 37;
+    --muted: 156 163 175;
+    --muted-fg: 156 163 175;
+    --muted-bg: 42 45 42;
+    --brd: 61 74 61;
+    --brd-light: 42 42 42;
+    --scrollbar: 61 74 61;
+    --scrollbar-hover: 107 114 128;
+    color-scheme: dark;
+  }
+}
+
 @layer base {
   * {
     margin: 0;
@@ -46,7 +79,7 @@
   }
 
   .btn-secondary {
-    @apply btn bg-white text-foreground border border-border hover:bg-gray-50 focus:ring-gray-300;
+    @apply btn bg-surface text-foreground border border-border hover:bg-surface-hover focus:ring-gray-300;
   }
 
   .btn-danger {
@@ -58,7 +91,7 @@
   }
 
   .btn-ghost {
-    @apply btn bg-transparent text-muted hover:bg-gray-100 hover:text-foreground;
+    @apply btn bg-transparent text-muted hover:bg-surface-hover hover:text-foreground;
   }
 
   .btn-sm {
@@ -78,7 +111,7 @@
   }
 
   .input {
-    @apply w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-colors duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
+    @apply w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-colors duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
   }
 
   .input-error {
@@ -110,7 +143,7 @@
   }
 
   .badge-neutral {
-    @apply badge bg-gray-100 text-gray-700;
+    @apply badge bg-muted-bg text-foreground;
   }
 
   .table-container {
@@ -122,7 +155,7 @@
   }
 
   .table thead {
-    @apply bg-gray-50 border-b border-border;
+    @apply bg-surface-hover border-b border-border;
   }
 
   .table th {
@@ -175,10 +208,56 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C9D3C9;
+  background: rgb(var(--scrollbar));
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9CA3AF;
+  background: rgb(var(--scrollbar-hover));
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Focus visible ── */
+:focus-visible {
+  outline: 3px solid rgb(var(--fg) / 0.7);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Windows High Contrast / forced-colors ── */
+@media (forced-colors: active) {
+  .btn,
+  .input,
+  .card,
+  .badge {
+    border: 1px solid ButtonText;
+  }
+
+  .btn-primary {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+
+  :focus-visible {
+    outline: 3px solid Highlight;
+  }
+
+  a {
+    color: LinkText;
+  }
 }
