@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Heart, FolderKanban, Calendar } from 'lucide-react';
+import { ArrowRight, Users, Heart, FolderKanban, Calendar, Instagram, MessageCircle } from 'lucide-react';
 import { useDocumentTitle } from '../../shared/hooks/useDocumentTitle';
 
 const highlights = [
@@ -68,6 +68,58 @@ export function HomePage() {
                 <p className="mt-2 text-sm text-muted">{item.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery */}
+      <section className="py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground">Nossas ações em imagens</h2>
+            <p className="mt-3 text-muted max-w-lg mx-auto">
+              Conheça os momentos e impactos de nossas ações na comunidade.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {[1, 2, 3, 4, 5].map((num) => (
+              <div key={num} className="relative h-48 sm:h-56 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <img
+                  src={`/Cufa ${num}.jpg`}
+                  alt={`CUFA ${num}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Social Media Links */}
+      <section className="py-12 bg-black text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-6">Conecte-se conosco</h2>
+            <div className="flex flex-wrap justify-center gap-6">
+              <a
+                href="https://www.instagram.com/cufapernambucooficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition-all hover:scale-105"
+              >
+                <Instagram className="w-5 h-5" />
+                Instagram
+              </a>
+              <a
+                href="https://wa.me/5581997475008?text=Olá,%20gostaria%20de%20informações%20sobre%20a%20ONG"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700 transition-all hover:scale-105"
+              >
+                <MessageCircle className="w-5 h-5" />
+                WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </section>
