@@ -83,11 +83,12 @@ export function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {['cufa1', 'cufa2', 'cufa3', 'cufa4', 'cufa5'].map((filename) => (
-              <div key={filename} className="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
+              <div key={filename} className="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow bg-gray-900">
                 <img
                   src={`/${filename}.jpg`}
                   alt={`CUFA Pernambuco ${filename}`}
-                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                  className="w-full h-72 object-contain hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
                 />
               </div>
             ))}
