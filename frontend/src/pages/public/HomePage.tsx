@@ -73,7 +73,7 @@ export function HomePage() {
       </section>
 
       {/* Gallery */}
-      <section className="py-16 bg-background">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground">Nossas ações em imagens</h2>
@@ -81,13 +81,13 @@ export function HomePage() {
               Conheça os momentos e impactos de nossas ações na comunidade.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {[1, 2, 3, 4, 5].map((num) => (
-              <div key={num} className="relative h-48 sm:h-56 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <div key={num} className="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
                 <img
                   src={`/Cufa ${num}.jpg`}
-                  alt={`CUFA ${num}`}
-                  className="w-full h-full object-cover"
+                  alt={`CUFA Pernambuco ${num}`}
+                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>
             ))}
