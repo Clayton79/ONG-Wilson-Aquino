@@ -73,7 +73,7 @@ export function HomePage() {
       </section>
 
       {/* Gallery */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground">Nossas ações em imagens</h2>
@@ -82,11 +82,11 @@ export function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {[1, 2, 3, 4, 5].map((num) => (
-              <div key={num} className="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
+            {['cufa1', 'cufa2', 'cufa3', 'cufa4', 'cufa5'].map((filename) => (
+              <div key={filename} className="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
                 <img
-                  src={`/Cufa ${num}.jpg`}
-                  alt={`CUFA Pernambuco ${num}`}
+                  src={`/${filename}.jpg`}
+                  alt={`CUFA Pernambuco ${filename}`}
                   className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>
