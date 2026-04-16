@@ -39,7 +39,7 @@ export function LoginPage() {
   return (
     <div>
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-foreground">Entrar</h2>
+        <h2 className="text-2xl font-bold text-foreground">Bem vindo !</h2>
         <p className="text-sm text-muted mt-1">Acesse sua conta para continuar</p>
       </div>
 
