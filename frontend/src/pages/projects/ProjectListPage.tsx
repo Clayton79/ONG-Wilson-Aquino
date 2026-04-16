@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, Search, Edit, Trash2, Eye, Users } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, Users } from 'lucide-react';
 import {
   Card, Button, Badge, Pagination, EmptyState, PageLoader, ErrorState, ConfirmDialog, Select,
 } from '../../shared/components';
@@ -113,9 +113,6 @@ export function ProjectListPage() {
                   <div className="flex items-start justify-between mb-3">
                     <Badge variant={cfg.variant}>{cfg.label}</Badge>
                     <div className="flex gap-1">
-                      <Button variant="ghost" size="sm" onClick={() => navigate(`/projects/${project.id}`)} aria-label="Ver detalhes" title="Ver detalhes">
-                        <Eye className="w-4 h-4" aria-hidden="true" />
-                      </Button>
                       <Button variant="ghost" size="sm" onClick={() => navigate(`/projects/${project.id}/edit`)} aria-label="Editar" title="Editar">
                         <Edit className="w-4 h-4" aria-hidden="true" />
                       </Button>

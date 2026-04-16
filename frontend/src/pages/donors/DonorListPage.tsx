@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, Search, Edit, Trash2, Eye, Phone, Mail, Building2, User } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, Phone, Mail, Building2, User } from 'lucide-react';
 import {
   Card,
   Button,
@@ -173,9 +173,6 @@ export function DonorListPage() {
                       </td>
                       <td>
                         <div className="flex items-center justify-end gap-1">
-                          <Button variant="ghost" size="sm" onClick={() => navigate(`/donors/${donor.id}`)} aria-label="Ver detalhes" title="Ver detalhes">
-                            <Eye className="w-4 h-4" aria-hidden="true" />
-                          </Button>
                           <Button variant="ghost" size="sm" onClick={() => navigate(`/donors/${donor.id}/edit`)} aria-label="Editar" title="Editar">
                             <Edit className="w-4 h-4" aria-hidden="true" />
                           </Button>

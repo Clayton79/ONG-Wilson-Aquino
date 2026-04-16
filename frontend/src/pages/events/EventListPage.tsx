@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Plus, Search, Calendar, MapPin, Trash2, Edit, Eye,
+  Plus, Search, Calendar, MapPin, Trash2, Edit,
 } from 'lucide-react';
 
 import {
@@ -136,9 +136,6 @@ export function EventListPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
-                    <Button variant="ghost" size="sm" onClick={() => navigate(`/events/${event.id}`)} aria-label="Ver detalhes" title="Ver detalhes">
-                      <Eye className="w-4 h-4" aria-hidden="true" />
-                    </Button>
                     <Button variant="ghost" size="sm" onClick={() => navigate(`/events/${event.id}/edit`)} aria-label="Editar" title="Editar">
                       <Edit className="w-4 h-4" aria-hidden="true" />
                     </Button>
